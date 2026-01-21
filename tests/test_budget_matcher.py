@@ -15,6 +15,10 @@ from skillrunner_budgetmatch.skill import (
 def test_parse_german_number() -> None:
     assert parse_german_number("1.640,47") == pytest.approx(1640.47)
     assert parse_german_number(" 7.452,00 € ") == pytest.approx(7452.0)
+    assert parse_german_number("1.000,01 €") == pytest.approx(1000.01)
+    assert parse_german_number("1.000") == pytest.approx(1000.0)
+    assert parse_german_number("1 000,01") == pytest.approx(1000.01)
+    assert parse_german_number("1.000.000,25") == pytest.approx(1000000.25)
 
 
 def test_parse_month() -> None:
