@@ -23,12 +23,25 @@ def normalize_column(name: str) -> str:
 
 def parse_german_number(value: str) -> float:
     """Parse German formatted numbers like ' 7.452,00 € '."""
-    cleaned = value.strip()
-    cleaned = cleaned.replace("€", "").replace(" ", "")
+    cleaned = value.strip().replace("\u00a0", " ")
     if cleaned == "":
         raise ValueError("Leerer Betrag")
-    cleaned = cleaned.replace(".", "")
-    cleaned = cleaned.replace(",", ".")
+    cleaned = re.sub(r"(?i)\b(?:eur|euro)\b", "", cleaned)
+    cleaned = cleaned.replace("€", "")
+    cleaned = cleaned.replace(" ", "")
+    cleaned = re.sub(r"[^\d,.\-+]", "", cleaned)
+    if cleaned == "" or cleaned in {"+", "-"}:
+        raise ValueError("Leerer Betrag")
+    if "," in cleaned:
+        cleaned = cleaned.replace(".", "")
+        cleaned = cleaned.replace(",", ".")
+    elif "." in cleaned:
+        if cleaned.count(".") > 1:
+            cleaned = cleaned.replace(".", "")
+        else:
+            left, right = cleaned.split(".")
+            if len(right) == 3 and left:
+                cleaned = f"{left}{right}"
     return float(cleaned)
 
 
