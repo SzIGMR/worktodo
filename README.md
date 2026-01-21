@@ -14,6 +14,21 @@ Optionaler Solver-Support:
 pip install -e .[opt]
 ```
 
+## Updates & Reinstall
+
+Wenn du den Code aktualisieren willst (z. B. nach einem `git pull`), installiere die Pakete erneut im Editable-Modus:
+
+```bash
+git pull
+pip install -e .
+```
+
+Falls du die optionalen Solver-Abhängigkeiten nutzt, installiere sie ebenfalls neu:
+
+```bash
+pip install -e .[opt]
+```
+
 ## CLI (Deutsch)
 
 ```bash
