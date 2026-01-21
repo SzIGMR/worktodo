@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillrunner"
+version = "0.1.0"
+description = "Skillrunner CLI with plugin-based skills"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+  {name = "Skillrunner Contributors"}
+]
+dependencies = [
+  "openpyxl>=3.1.2",
+  "xlrd>=2.0"
+]
+
+[project.optional-dependencies]
+opt = [
+  "pulp>=2.8",
+  "ortools>=9.7"
+]
+
+test = [
+  "pytest>=7.4"
+]
+
+[project.scripts]
+skillrunner = "skillrunner.cli:main"
+
+[project.entry-points."skillrunner.skills"]
+budget_matcher = "skillrunner_budgetmatch.skill:BudgetMatcherSkill"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
