@@ -50,6 +50,16 @@ skillrunner run budget_matcher \
 skillrunner run budget_matcher --generate-templates ./templates
 ```
 
+### Schnellstart-Skripte (Explorer-klickbar)
+
+Im Ordner `scripts/` liegen drei Varianten als Shell- und Windows-Batch-Dateien, die sich per Doppelklick starten lassen:
+
+- `run_templates.(sh|bat)` erzeugt Template-Dateien in `scripts/templates/`.
+- `run_forecast.(sh|bat)` erstellt eine Forecast-Auswertung.
+- `run_optimize.(sh|bat)` führt die Optimierung aus.
+
+Passe in den Skripten bei Bedarf die Pfade zu `bookings.xlsx`, `budgets.xlsx` und das Geschäftsjahr (`FY_START_YEAR`) an.
+
 ### Eingaben konvertieren
 
 ```bash
